@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="container mx-auto mt-20">
     <Header />
-      <div className="mt-12 flex">
+      <div className="md:flex mt-12">
       <Formulario />
       <ListadoPersonas />
       </div>

@@ -1,6 +1,11 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+
 
 const Formulario = () => {
+	const [persona, setPersona] = useState("");
+
+
   return (
     <div className="md:w-1/2 lg:w-2/5">
       <h2 className="font-black text-3xl text-center">Seguimiento Personas</h2>
@@ -11,23 +16,25 @@ const Formulario = () => {
 
       <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
         <div className='mb-5'>
-          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nombre de la Persona</label>
+          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nombre</label>
 
           <input
             id='nombre'
             type="text"
             placeholder="Introduce el Nombre de la Persona"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+			value={persona}
+			onChange={(e)=> setPersona(e.target.value)}
           />
         </div>
 
         <div className='mb-5'>
-          <label htmlFor='pais' className='block text-gray-700 uppercase font-bold'>Pais de la Persona</label>
+          <label htmlFor='apellidos' className='block text-gray-700 uppercase font-bold'>Apellidos</label>
 
           <input
-            id='pais'
+            id='apellidos'
             type="text"
-            placeholder="Introduce el Pais de la Persona"
+            placeholder="Introduce tus apellidos"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
           />
         </div>
@@ -38,7 +45,7 @@ const Formulario = () => {
           <input
             id='email'
             type="email"
-            placeholder="Email Contacto Persona"
+            placeholder="Introduce un correo valido"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
           />
         </div>
@@ -58,8 +65,7 @@ const Formulario = () => {
           <textarea 
             id='comentarios'
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
-            placeholder='Describe los Síntomas'
-          
+            placeholder='Escribe un comentario'
           />
         </div>
 
