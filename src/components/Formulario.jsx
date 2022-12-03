@@ -5,6 +5,12 @@ import { useState, useEffect } from 'react'
 const Formulario = () => {
 	const [persona, setPersona] = useState("");
 
+	// modificando la variable a traves de una funcion
+	// const miPo = (e) => {
+	// 	setPersona(e.target.value)
+	// }
+	
+
 
   return (
     <div className="md:w-1/2 lg:w-2/5">
@@ -24,7 +30,7 @@ const Formulario = () => {
             placeholder="Introduce el Nombre de la Persona"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
 			value={persona}
-			onChange={(e)=> setPersona(e.target.value)}
+			onChange={(e)=> setPersona(e.target.value)} /* aqui pongo la funcion mipo */
           />
         </div>
 
