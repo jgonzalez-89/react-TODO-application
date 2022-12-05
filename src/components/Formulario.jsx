@@ -2,31 +2,46 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 
-const Formulario = () => {
-	const [persona, setPersona] = useState("");
+const Formulario = ({ persona, setPersona }) => {
+	const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
   const [nacimiento, setNacimiento] = useState("");
   const [comentario, setComentario] = useState("");
+
+  const [error, setError] = useState(false)
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validacion de formulario
-    if([persona, apellido, email, nacimiento, comentario].includes("")){
+    if([nombre, apellido, email, nacimiento, comentario].includes("")){
       console.log("Hay al menos un campo vacio")
-    } else {
-      console.log("Todos llenos")
+      setError(true);
+      return;
     }
+    setError(false);
+
+    // Objeto de Persona
+    const objetoPersona = {
+      nombre, 
+      apellido, 
+      email, 
+      nacimiento, 
+      comentario
+    }
+
+    setPersona([...persona, objetoPersona]);
+
+    // Reiniciar Formulario
+    setNombre('')
+    setApellido('')
+    setEmail('')
+    setNacimiento('')
+    setComentario('')
+
   }
-
-	// modificando la variable a traves de una funcion
-	// const miPo = (e) => {
-	// 	setPersona(e.target.value)
-	// }
-	
-
 
   return (
     <div className="mx-3 md:w-1/2 lg:w-2/5">
@@ -39,6 +54,7 @@ const Formulario = () => {
       <form 
       onSubmit={handleSubmit}
       className="bg-white shadow-xl rounded-lg py-10 px-5 mb-10">
+        {error && (<div className="bg-red-600 text-center uppercase text-white texte-bold p-3 rounded-md mb-3"><p>Todos los campos son obligatirios</p></div>)}
         <div className='mb-5'>
           <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nombre</label>
 
@@ -47,8 +63,8 @@ const Formulario = () => {
             type="text"
             placeholder="Introduce el Nombre de la Persona"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
-            value={persona}
-            onChange={(e) => setPersona(e.target.value)} /* aqui pongo la funcion mipo */
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
           />
         </div>
 
