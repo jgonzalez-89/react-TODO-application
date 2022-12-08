@@ -49,7 +49,7 @@ const Formulario = ({ tareas, setTareas }) => {
       <h2 className="font-black text-3xl text-center">Formulario de Tareas</h2>
 
       <p className='text-lg mt-5 text-center mb-10'>Añade Tareas y {""}
-        <span className="text-indigo-600 font-bold">Administralas</span>
+        <span className="text-sky-600 font-bold">Administralas</span>
       </p>
 
       <form 
@@ -120,7 +120,7 @@ const Formulario = ({ tareas, setTareas }) => {
 
         <input
           type="submit"
-          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 rounded-md cursor-pointer transition-all"
+          className="bg-sky-600 w-full p-3 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all"
           value="Agregar Tarea"
 
         />
