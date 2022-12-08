@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import Error from './Error';
 
 
-const Formulario = ({ tarea, setTarea }) => {
+const Formulario = ({ tareas, setTareas }) => {
+  const [nombreTarea, setNombreTarea] = useState("");
 	const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [fecha, setFecha] = useState("");
@@ -16,7 +17,7 @@ const Formulario = ({ tarea, setTarea }) => {
     e.preventDefault();
 
     // Validacion de formulario
-    if([nombre, email, fecha, comentario].includes("")){
+    if([nombre, nombreTarea, email, fecha, comentario].includes("")){
       console.log("Hay al menos un campo vacio")
       setError(true);
       return;
@@ -24,17 +25,19 @@ const Formulario = ({ tarea, setTarea }) => {
     setError(false);
 
     // Objeto de Tarea
-    const objetoTarea = {
-      nombre,  
+    const objetoTareas = {
+      nombre,
+      nombreTarea,  
       email, 
       fecha, 
       comentario
     }
 
-    setTarea([...tarea, objetoTarea]);
+    setTareas([...tareas, objetoTareas]);
 
     // Reiniciar Formulario
     setNombre('')
+    setNombreTarea('')
     setEmail('')
     setFecha('')
     setComentario('')
@@ -43,7 +46,7 @@ const Formulario = ({ tarea, setTarea }) => {
 
   return (
     <div className="mx-3 md:w-1/2 lg:w-2/5">
-      <h2 className="font-black text-3xl text-center">Seguimiento Tareas</h2>
+      <h2 className="font-black text-3xl text-center">Formulario de Tareas</h2>
 
       <p className='text-lg mt-5 text-center mb-10'>Añade Tareas y {""}
         <span className="text-indigo-600 font-bold">Administralas</span>
@@ -54,15 +57,28 @@ const Formulario = ({ tarea, setTarea }) => {
       className="bg-white shadow-xl rounded-lg py-10 px-5 mb-10">
         {error && <Error mensaje='Todos los campos son obligatorios' />}
         <div className='mb-5'>
-          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nueva Tarea</label>
+          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nombre Persona</label>
 
           <input
             id='nombre'
             type="text"
-            placeholder="Introduce un nombre de Tarea"
+            placeholder="Introduce tu nombre"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
+          />
+        </div>
+
+        <div className='mb-5'>
+          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nueva Tarea</label>
+
+          <input
+            id='tarea'
+            type="text"
+            placeholder="Nombre de la Tarea"
+            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            value={nombreTarea}
+            onChange={(e) => setNombreTarea(e.target.value)}
           />
         </div>
 
