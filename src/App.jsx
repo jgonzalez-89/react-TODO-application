@@ -7,6 +7,7 @@ import ListadoTareas from "./components/ListadoTareas";
 function App() {
 
   const [tareas, setTareas] = useState([]);
+  const [tarea, setTarea] = useState({});
 
   return (
     <div className="container mx-auto mt-20">
@@ -17,7 +18,9 @@ function App() {
         setTareas={setTareas}
       />
       <ListadoTareas
-      tareas={tareas} />
+      tareas={tareas}
+      setTarea={setTarea}
+      />
       </div>
 
     </div>

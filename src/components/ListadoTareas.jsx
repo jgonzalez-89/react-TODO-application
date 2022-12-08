@@ -2,7 +2,7 @@ import React from 'react'
 import Tareas from './Tareas'
 
 
-const ListadoTareas = ({ tareas }) => {
+const ListadoTareas = ({ tareas, setTarea }) => {
 
     return (
         <div className="mx-3 md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -21,6 +21,7 @@ const ListadoTareas = ({ tareas }) => {
                             <Tareas
                                 key={index}
                                 tarea={tarea}
+                                setTarea={setTarea}
                             />
                         )
                     })}
