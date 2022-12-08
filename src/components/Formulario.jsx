@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import Error from './Error';
 
 
-const Formulario = ({ persona, setPersona }) => {
+const Formulario = ({ tarea, setTarea }) => {
 	const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
-  const [nacimiento, setNacimiento] = useState("");
+  const [fecha, setFecha] = useState("");
   const [comentario, setComentario] = useState("");
 
   const [error, setError] = useState(false)
@@ -16,68 +16,53 @@ const Formulario = ({ persona, setPersona }) => {
     e.preventDefault();
 
     // Validacion de formulario
-    if([nombre, apellido, email, nacimiento, comentario].includes("")){
+    if([nombre, email, fecha, comentario].includes("")){
       console.log("Hay al menos un campo vacio")
       setError(true);
       return;
     }
     setError(false);
 
-    // Objeto de Persona
-    const objetoPersona = {
-      nombre, 
-      apellido, 
+    // Objeto de Tarea
+    const objetoTarea = {
+      nombre,  
       email, 
-      nacimiento, 
+      fecha, 
       comentario
     }
 
-    setPersona([...persona, objetoPersona]);
+    setTarea([...tarea, objetoTarea]);
 
     // Reiniciar Formulario
     setNombre('')
-    setApellido('')
     setEmail('')
-    setNacimiento('')
+    setFecha('')
     setComentario('')
 
   }
 
   return (
     <div className="mx-3 md:w-1/2 lg:w-2/5">
-      <h2 className="font-black text-3xl text-center">Seguimiento Personas</h2>
+      <h2 className="font-black text-3xl text-center">Seguimiento Tareas</h2>
 
-      <p className='text-lg mt-5 text-center mb-10'>Añade Personas y {""}
+      <p className='text-lg mt-5 text-center mb-10'>Añade Tareas y {""}
         <span className="text-indigo-600 font-bold">Administralas</span>
       </p>
 
       <form 
       onSubmit={handleSubmit}
       className="bg-white shadow-xl rounded-lg py-10 px-5 mb-10">
-        {error && (<div className="bg-red-600 text-center uppercase text-white texte-bold p-3 rounded-md mb-3"><p>Todos los campos son obligatirios</p></div>)}
+        {error && <Error mensaje='Todos los campos son obligatorios' />}
         <div className='mb-5'>
-          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nombre</label>
+          <label htmlFor='nombre' className='block text-gray-700 uppercase font-bold'>Nueva Tarea</label>
 
           <input
             id='nombre'
             type="text"
-            placeholder="Introduce el Nombre de la Persona"
+            placeholder="Introduce un nombre de Tarea"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-          />
-        </div>
-
-        <div className='mb-5'>
-          <label htmlFor='apellidos' className='block text-gray-700 uppercase font-bold'>Apellidos</label>
-
-          <input
-            id='apellidos'
-            type="text"
-            placeholder="Introduce tus apellidos"
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
-            value={apellido}
-            onChange={(e) => setApellido(e.target.value)}
           />
         </div>
 
@@ -95,23 +80,23 @@ const Formulario = ({ persona, setPersona }) => {
         </div>
 
         <div className='mb-5'>
-          <label htmlFor='fecha' className='block text-gray-700 uppercase font-bold'>Fecha de Nacimiento</label>
+          <label htmlFor='fecha' className='block text-gray-700 uppercase font-bold'>Fecha de la Tarea</label>
 
           <input
-            id='nacimiento'
+            id='fecha'
             type="date"
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
-            value={nacimiento}
-            onChange={(e) => setNacimiento(e.target.value)}
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
           />
         </div>
 
         <div className='mb-5'>
-          <label htmlFor='comentarios' className='block text-gray-700 uppercase font-bold'>Comentarios</label>
+          <label htmlFor='comentarios' className='block text-gray-700 uppercase font-bold'>Descripcion</label>
           <textarea
             id='comentarios'
             className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
-            placeholder='Escribe un comentario'
+            placeholder='Describe brevemente la tarea'
             value={comentario}
             onChange={(e) => setComentario(e.target.value)}
           />
@@ -120,7 +105,7 @@ const Formulario = ({ persona, setPersona }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 rounded-md cursor-pointer transition-all"
-          value="Agregar persona"
+          value="Agregar Tarea"
 
         />
       </form>
