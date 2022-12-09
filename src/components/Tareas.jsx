@@ -1,8 +1,16 @@
 import React from 'react'
 
-const Tareas = ({ tarea, setTarea }) => {
+const Tareas = ({ tarea, setTarea, eliminarTarea }) => {
 
-    const { nombre, nombreTarea, email, fecha, comentario } = tarea
+    const { nombre, nombreTarea, email, fecha, comentario, id } = tarea
+
+    const handleEliminar = () => {
+        const respuesta = confirm('Vas a eliminar esta tarea!')
+
+        if(respuesta) {
+            eliminarTarea(id)
+        }
+    }
 
     // console.log(tarea)
     return (
@@ -28,10 +36,10 @@ const Tareas = ({ tarea, setTarea }) => {
                 <span className='font-normal normal-case'>{comentario}</span>
             </p>
 
-            <div className='flex mt-10 justify-between mr-10 ml-10'>
+            <div className='flex mt-10 justify-between m-auto'>
                 <button
                     type='button'
-                    className='bg-sky-600 py-2 px-10 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all'
+                    className=' bg-sky-600 py-2 px-10 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all'
                     onClick={()=> setTarea(tarea)}
 
                 >Editar</button>
@@ -39,6 +47,7 @@ const Tareas = ({ tarea, setTarea }) => {
                 <button
                     type='button'
                     className='bg-red-600 py-2 px-10 text-white uppercase font-bold hover:bg-red-800 rounded-md cursor-pointer transition-all'
+                    onClick={handleEliminar}
 
                 >Eliminar</button>
             </div>

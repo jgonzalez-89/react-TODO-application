@@ -3,14 +3,31 @@ import { useState, useEffect } from 'react'
 import Error from './Error';
 
 
-const Formulario = ({ tareas, setTareas }) => {
+const Formulario = ({ tareas, setTareas, tareaObj, setTarea}) => {
   const [nombreTarea, setNombreTarea] = useState("");
 	const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [fecha, setFecha] = useState("");
   const [comentario, setComentario] = useState("");
-
   const [error, setError] = useState(false)
+
+  const generarId=()=>{
+    const fecha = Date.now().toString(36)
+    const random = Math.random().toString(36).substr(2);
+
+    return fecha + random
+  }
+
+  useEffect(()=>{
+    if(Object.keys(tareaObj).length > 0 ){
+      setNombre(tareaObj.nombre);
+      setNombreTarea(tareaObj.nombreTarea);
+      setEmail(tareaObj.email);
+      setFecha(tareaObj.fecha);
+      setComentario(tareaObj.comentario);
+
+    }
+  }, [tareaObj])
 
 
   const handleSubmit = (e) => {
@@ -30,10 +47,24 @@ const Formulario = ({ tareas, setTareas }) => {
       nombreTarea,  
       email, 
       fecha, 
-      comentario
+      comentario,
+
     }
 
-    setTareas([...tareas, objetoTareas]);
+    if(tareaObj.id) {
+      // Editando el Registro de Tareas
+      objetoTareas.id = tareaObj.id
+      const tareasActualizadas = tareas.map( tareaObjState => tareaObjState.id === tareaObj.id ? objetoTareas : tareaObjState )
+
+      setTareas(tareasActualizadas)
+      setTarea({})
+
+    }else {
+      // Añadiendo Nueva Tarea al Registro
+      objetoTareas.id = generarId();
+      setTareas([...tareas, objetoTareas]);
+    }
+
 
     // Reiniciar Formulario
     setNombre('')
@@ -41,7 +72,6 @@ const Formulario = ({ tareas, setTareas }) => {
     setEmail('')
     setFecha('')
     setComentario('')
-
   }
 
   return (
@@ -63,7 +93,7 @@ const Formulario = ({ tareas, setTareas }) => {
             id='nombre'
             type="text"
             placeholder="Introduce tu nombre"
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            className='border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md'
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
           />
@@ -75,8 +105,8 @@ const Formulario = ({ tareas, setTareas }) => {
           <input
             id='tarea'
             type="text"
-            placeholder="Nombre de la Tarea"
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            placeholder="Nombre de la tarea"
+            className='border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md'
             value={nombreTarea}
             onChange={(e) => setNombreTarea(e.target.value)}
           />
@@ -89,7 +119,7 @@ const Formulario = ({ tareas, setTareas }) => {
             id='email'
             type="email"
             placeholder="Introduce un correo valido"
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            className='border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -101,7 +131,7 @@ const Formulario = ({ tareas, setTareas }) => {
           <input
             id='fecha'
             type="date"
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            className='border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md'
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
           />
@@ -111,7 +141,7 @@ const Formulario = ({ tareas, setTareas }) => {
           <label htmlFor='comentarios' className='block text-gray-700 uppercase font-bold'>Descripcion</label>
           <textarea
             id='comentarios'
-            className='border-2 w-full p-2 mt-2 placeholder-gray-600 rounded-md'
+            className='border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md'
             placeholder='Describe brevemente la tarea'
             value={comentario}
             onChange={(e) => setComentario(e.target.value)}
@@ -121,7 +151,7 @@ const Formulario = ({ tareas, setTareas }) => {
         <input
           type="submit"
           className="bg-sky-600 w-full p-3 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all"
-          value="Agregar Tarea"
+          value={tareaObj.id ? 'Editar Tarea' : 'Agregar Tarea' }
 
         />
       </form>
