@@ -5,7 +5,7 @@ const ListadoTareas = ({ tareas, setTarea, eliminarTarea }) => {
 
     return (
         <div className="mx-3 md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
-
+            
             {tareas && tareas.length ? (
                 <>
                     <h2 className='font-black text-3xl text-center'>Listado Tareas</h2>
