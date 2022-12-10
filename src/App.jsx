@@ -17,72 +17,59 @@ function App() {
 
   }
 
-  const [posts, setPosts] = useState();
+  // const [posts, setPosts] = useState();
 
-  const FetchApiPosts = () => {
-     fetch('http://assets.breatheco.de/apis/fake/todos/user/jgonzalez89', {
-        method: "GET",
-        // body: JSON.stringify(todos),
-        // headers: {
-        //   "Content-Type": "application/json"
-        // }
-      })
-      .then(resp => {
-          // console.log(resp.ok); // Será true (verdad) si la respuesta es exitosa.
-          // console.log(resp.status); // el código de estado = 200 o código = 400 etc.
-          // console.log(resp.text()); // Intentará devolver el resultado exacto como cadena (string)
-          return resp.json(); // (regresa una promesa) will try to parse the result as json as return a promise that you can .then for results
-      })
-      .then(data => {
-          //Aquí es donde debe comenzar tu código después de que finalice la búsqueda
-          // setPosts(data); //esto imprimirá en la consola el objeto exacto recibido del servidor
-          setPosts(data);
-          
-      })
-      .catch(error => {
-          //manejo de errores
-          console.log(error);
-      });
-    }
+  // const FetchApiPosts = () => {
+  //    fetch('http://assets.breatheco.de/apis/fake/todos/user/jgonzalez89', {
+  //       method: "GET",
+  //     })
+  //     .then(resp => {
+  //         return resp.json();
+  //     })
+  //     .then(data => {
+  //         setPosts(data);
+  //     })
+  //     .catch(error => {
+  //         //manejo de errores
+  //         console.log(error);
+  //     });
+  //   }
 
-    const PutApiPosts = (nuevoPost) => {
-      fetch('http://assets.breatheco.de/apis/fake/todos/user/jgonzalez89', {
-         method: "PUT",
-         body: JSON.stringify(nuevoPost),
-         headers: {
-           "Content-Type": "application/json"
-         }
-       })
-       .then(resp => {
-           // console.log(resp.ok); // Será true (verdad) si la respuesta es exitosa.
-           // console.log(resp.status); // el código de estado = 200 o código = 400 etc.
-           // console.log(resp.text()); // Intentará devolver el resultado exacto como cadena (string)
-           return resp.json(); // (regresa una promesa) will try to parse the result as json as return a promise that you can .then for results
-       })
-       .then(data => {
-           //Aquí es donde debe comenzar tu código después de que finalice la búsqueda
-           // setPosts(data); //esto imprimirá en la consola el objeto exacto recibido del servidor
-           setPosts(data);
+  //   const PutApiPosts = (nuevoPost) => {
+  //     fetch('http://assets.breatheco.de/apis/fake/todos/user/jgonzalez89', {
+  //        method: "PUT",
+  //        body: JSON.stringify(nuevoPost),
+  //        headers: {
+  //          "Content-Type": "application/json"
+  //        }
+  //      })
+  //      .then(resp => {
+   
+  //          return resp.json();
+  //      })
+  //      .then(data => {
            
-       })
-       .catch(error => {
-           //manejo de errores
-           console.log(error);
-       });
-     }
+  //          setPosts(data);
+           
+  //      })
+  //      .catch(error => {
+  //          //Logs de errores
+  //          console.log(error);
+  //      });
+  //    }
 
-    useEffect(()=>{
-      FetchApiPosts()
-    }, [])
+  //   useEffect(()=>{
+  //     FetchApiPosts()
+  //   }, [])
 
 
-    function AgregarTarea() {
-      const tareaNueva = {label : "hola", done : true}
+  //   function AgregarTarea() {
+  //     const tareaNueva = {label : "hola", done : true,}
 
-      const nuevoPost=[...posts, tareaNueva]
+  //     const nuevoPost=[...posts, tareaNueva]
  
-      PutApiPosts(nuevoPost)
-    }
+  //     PutApiPosts(nuevoPost)
+  //   }
   
     
 
@@ -98,14 +85,13 @@ function App() {
         setTarea={setTarea}
       />
       <ListadoTareas
-      tareas={posts}
+      tareas={tareas} //Agregar "posts" para ejecutar la Api
       setTarea={setTarea}
       eliminarTarea={eliminarTarea}
       />
       
       </div>
-      <button onClick={AgregarTarea}>Click Aqui!</button>
-      {/* <FetchApiPosts /> */}
+      {/* <button onClick={AgregarTarea}>Click Aqui!</button> */}
       
       <Footer />
     </div>
