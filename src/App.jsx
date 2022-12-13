@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-
 import Footer from "./components/Footer";
 import Formulario from "./components/Formulario"
 import Header from "./components/Header"
@@ -14,9 +13,7 @@ function App() {
   const eliminarTarea = (id) => {
     const tareasActualizadas = tareas.filter(tarea => tarea.id !== id)
     setTareas(tareasActualizadas)
-
   }
-
   // const [posts, setPosts] = useState();
 
   // const FetchApiPosts = () => {
@@ -44,13 +41,13 @@ function App() {
   //        }
   //      })
   //      .then(resp => {
-   
+
   //          return resp.json();
   //      })
   //      .then(data => {
-           
+
   //          setPosts(data);
-           
+
   //      })
   //      .catch(error => {
   //          //Logs de errores
@@ -58,41 +55,94 @@ function App() {
   //      });
   //    }
 
-  //   useEffect(()=>{
-  //     FetchApiPosts()
-  //   }, [])
 
+  // Actualizando _____________-!!!!
 
-  //   function AgregarTarea() {
-  //     const tareaNueva = {label : "hola", done : true,}
+  // API urls
+  let host = 'https://assets.breatheco.de/apis/fake/todos/user/';
+  let user = 'jgonzalez89';
 
-  //     const nuevoPost=[...posts, tareaNueva]
- 
-  //     PutApiPosts(nuevoPost)
-  //   }
+  // fetch GET todos - consulta los todos desde la API
+  const fetchGetTodos = async () => {
+    const url = host + user;
+    const request = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    const response = await fetch(url, request);
+    const responseJSON = await response.json();
+    responseJSON.map((item) => { setList((e) => [...e, item.label]); })
+  };
+
+  // fetch PUT todos - agrega un todo a la lista en la API
+  const fetchPutTodos = async (todos) => {
+    const url = host + user;
+    const request = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(todos),
+    };
+    const response = await fetch(url, request);
+    const responseJSON = await response.json();
+    if (responseJSON.ok) {
+      console.log("todo ok");
+    } else {
+      console.log('error', error);
+    }
+  }
+
+  // funcion onSubmit del form
+  const addTask = (event) => {
+    event.preventDefault();
+    if (inputValue === "") {
+      return;
+    } else {
+
+      // creo una array vacio, recorro list, y genero un array de objetos
+      var todosPUT = [];
+      for (let index = 0; index < list.length; index++) {
+        const element = list[index];
+        let item = {};
+        item['label'] = element;
+        item['done'] = false;
+        todosPUT.push(item);
+      };
+
+      // agrego la nueva tarea 'inputValue' en formato objeto
+      todosPUT.push({ 'label': inputValue, 'done': false });
+
+      // agrego el tecth para actualizar la API
+      fetchPutTodos(todosPUT);
+      setList([...list, inputValue]);
+      setInputValue("");
+    }
+  }
+
+  useEffect(() => {
+    fetchGetTodos()
+  }, [])
+
   
-    
-
   return (
     <div className="container mx-auto mt-20">
-      
-    <Header />
+
+      <Header />
       <div className="md:flex mt-12">
-      <Formulario
-        tareas={tareas}
-        setTareas={setTareas}
-        tareaObj={tareaObj}
-        setTarea={setTarea}
-      />
-      <ListadoTareas
-      tareas={tareas} //Agregar "posts" para ejecutar la Api
-      setTarea={setTarea}
-      eliminarTarea={eliminarTarea}
-      />
-      
+        <Formulario
+          tareas={tareas}
+          setTareas={setTareas}
+          tareaObj={tareaObj}
+          setTarea={setTarea}
+        />
+        <ListadoTareas
+          tareas={tareas} //Agregar "posts" para ejecutar la Api
+          setTarea={setTarea}
+          eliminarTarea={eliminarTarea}
+        />
+
       </div>
-      {/* <button onClick={AgregarTarea}>Click Aqui!</button> */}
-      
       <Footer />
     </div>
 
@@ -100,4 +150,3 @@ function App() {
 }
 
 export default App
-  

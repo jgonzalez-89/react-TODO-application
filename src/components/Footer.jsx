@@ -6,7 +6,6 @@ const Footer = () => {
             <span className="text-sm text-gray-500 dark:text-gray-400">© 2022 <a href="https://jgonzalez89.es/" type="link" className="font-bold text-sky-300 no-underline hover:underline">jgonzalez89</a>. 4Geeks Academy.
             </span>
         </footer>
-
     )
 }
 

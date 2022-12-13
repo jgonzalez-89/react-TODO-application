@@ -48,7 +48,6 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea}) => {
       email, 
       fecha, 
       comentario,
-
     }
 
     if(tareaObj.id) {
