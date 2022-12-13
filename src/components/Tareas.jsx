@@ -52,7 +52,6 @@ const Tareas = ({ tarea, setTarea, eliminarTarea }) => {
                 >Eliminar</button>
             </div>
         </div>
-
   )
 }
 

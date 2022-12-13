@@ -24,7 +24,6 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
       setEmail(tareaObj.email);
       setFecha(tareaObj.fecha);
       setComentario(tareaObj.comentario);
-
     }
   }, [tareaObj])
 
@@ -46,7 +45,6 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
       email,
       fecha,
       comentario,
-
     }
 
     if (tareaObj.id) {
@@ -149,7 +147,6 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
           type="submit"
           className="bg-sky-600 w-full p-3 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all"
           value={tareaObj.id ? 'Editar Tarea' : 'Agregar Tarea'}
-
         />
       </form>
     </div>

@@ -25,10 +25,8 @@ const ListadoTareas = ({ tareas, setTarea, eliminarTarea }) => {
                             />
                         )
                     })}
-
                 </>
             ) : (
-
                 <>
                     <h2 className='font-black text-3xl text-center'>No hay Tareas</h2>
                     <p className='text-lg mt-5 text-center mb-10'>
@@ -37,8 +35,6 @@ const ListadoTareas = ({ tareas, setTarea, eliminarTarea }) => {
                     </p>
                 </>
             )}
-
-
         </div>
     )
 }
