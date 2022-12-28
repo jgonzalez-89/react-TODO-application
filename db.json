@@ -1,0 +1,44 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "nombre": "Juan",
+      "nombreTarea": "Terminar ejercicios de JavaScript",
+      "email": "correo@correo.com",
+      "fecha": "2022-12-15",
+      "comentario": "Solo duerme"
+    },
+    {
+      "id": 2,
+      "nombre": "karen",
+      "nombreTarea": "Enviar los deberes de Python",
+      "email": "correo@correo.com",
+      "fecha": "2022-12-15",
+      "comentario": "Ejercicios del 100 al 250"
+    },
+    {
+      "id": 3,
+      "nombre": "Miguel",
+      "nombreTarea": "Limpiar el ordenador",
+      "email": "correo@correo.com",
+      "fecha": "2022-12-15",
+      "comentario": "Empezar por la CPU"
+    },
+    {
+      "id": 4,
+      "nombre": "Josue",
+      "nombreTarea": "Terminar ejercicios de Python",
+      "email": "correo@correo.com",
+      "fecha": "2022-12-15",
+      "comentario": "Empezar por el ejercicio 20"
+    },
+    {
+      "id": 5,
+      "nombre": "Manuel",
+      "nombreTarea": "Aprender Boostrap",
+      "email": "correo@correo.com",
+      "fecha": "2022-12-15",
+      "comentario": "Solo duerme"
+    }
+  ]
+}
