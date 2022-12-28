@@ -1,73 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Error from "./Error";
+import { NewTodo } from "../models/todo";
+import { HttpHandler } from "../http/handler";
 
-const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
-  const [nombreTarea, setNombreTarea] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [comentario, setComentario] = useState("");
-  const [error, setError] = useState(false);
-
-  const generarId = () => {
-    const fecha = Date.now().toString(36);
-    const random = Math.random().toString(36).substr(2);
-
-    return fecha + random;
-  };
-
-  useEffect(() => {
-    if (Object.keys(tareaObj).length > 0) {
-      setNombre(tareaObj.nombre);
-      setNombreTarea(tareaObj.nombreTarea);
-      setEmail(tareaObj.email);
-      setFecha(tareaObj.fecha);
-      setComentario(tareaObj.comentario);
-    }
-  }, [tareaObj]);
+const Formulario = ({ setUpdated }) => {
+  const [todo, setTodo] = useState(NewTodo());
+  const handler = new HttpHandler();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validacion de formulario
-    if ([nombre, nombreTarea, email, fecha, comentario].includes("")) {
-      console.log("Hay al menos un campo vacio");
-      setError(true);
-      return;
-    }
-    setError(false);
-
-    // Objeto de Tarea
-    const objetoTareas = {
-      nombre,
-      nombreTarea,
-      email,
-      fecha,
-      comentario,
-    };
-
-    if (tareaObj.id) {
-      // Editando el Registro de Tareas
-      objetoTareas.id = tareaObj.id;
-      const tareasActualizadas = tareas.map((tareaObjState) =>
-        tareaObjState.id === tareaObj.id ? objetoTareas : tareaObjState
-      );
-
-      setTareas(tareasActualizadas);
-      setTarea({});
-    } else {
-      // Añadiendo Nueva Tarea al Registro
-      objetoTareas.id = generarId();
-      setTareas([...tareas, objetoTareas]);
-    }
-
-    // Reiniciar Formulario
-    setNombre("");
-    setNombreTarea("");
-    setEmail("");
-    setFecha("");
-    setComentario("");
+    // TODO: Send the post:
+    handler
+      .post(todo)
+      .then(() => {
+        setUpdated((prev) => prev++);
+        setTodo(NewTodo());
+      })
+      .catch(() => {
+        console.error("Error");
+      });
+      
   };
 
   return (
@@ -83,7 +36,6 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
         onSubmit={handleSubmit}
         className="bg-white shadow-xl rounded-lg py-10 px-5 mb-10"
       >
-        {error && <Error mensaje="Todos los campos son obligatorios" />}
         <div className="mb-5">
           <label
             htmlFor="nombre"
@@ -94,11 +46,14 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
 
           <input
             id="nombre"
+            required={true}
             type="text"
             placeholder="Introduce tu nombre"
             className="border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            value={todo.nombre}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, nombre: e.target.value }))
+            }
           />
         </div>
 
@@ -112,11 +67,14 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
 
           <input
             id="tarea"
+            required={true}
             type="text"
             placeholder="Nombre de la tarea"
             className="border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md"
-            value={nombreTarea}
-            onChange={(e) => setNombreTarea(e.target.value)}
+            value={todo.tarea}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, tarea: e.target.value }))
+            }
           />
         </div>
 
@@ -131,10 +89,13 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
           <input
             id="email"
             type="email"
+            required={true}
             placeholder="Introduce un correo valido"
             className="border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={todo.email}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, email: e.target.value }))
+            }
           />
         </div>
 
@@ -148,10 +109,13 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
 
           <input
             id="fecha"
+            required={true}
             type="date"
             className="border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md"
-            value={fecha}
-            onChange={(e) => setFecha(e.target.value)}
+            value={todo.fecha}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, fecha: e.target.value }))
+            }
           />
         </div>
 
@@ -164,17 +128,20 @@ const Formulario = ({ tareas, setTareas, tareaObj, setTarea }) => {
           </label>
           <textarea
             id="comentarios"
+            required={true}
             className="border-2 w-full p-2 mt-2 placeholder-gray-300 rounded-md"
             placeholder="Describe brevemente la tarea"
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
+            value={todo.comentario}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, comentario: e.target.value }))
+            }
           />
         </div>
 
         <input
           type="submit"
           className="bg-sky-600 w-full p-3 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all"
-          value={tareaObj.id ? "Editar Tarea" : "Agregar Tarea"}
+          value={todo.id ? "Editar Tarea" : "Agregar Tarea"}
         />
       </form>
     </div>
