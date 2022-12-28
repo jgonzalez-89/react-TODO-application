@@ -12,25 +12,23 @@ export function loader() {
 function App() {
   const [todos, setTodos] = useState([]);
   const [updated, setUpdated] = useState(0);
-  const handler = new HttpHandler()
+  const handler = new HttpHandler();
 
   useEffect(() => {
     const caller = async () => {
-      let response = await handler.get()
-      setTodos(response)
-    }
+      let response = await handler.get();
+      setTodos(response);
+    };
     caller();
   }, [updated]);
- 
+
   return (
     <div className="container mx-auto mt-20">
       <Header />
       <div className="md:flex mt-12">
-        <Formulario
-          setUpdated={setUpdated}/>
+        <Formulario setUpdated={setUpdated} />
 
-        <ListadoTareas
-          tareas={todos}/>
+        <ListadoTareas tareas={todos} />
       </div>
       <Footer />
     </div>

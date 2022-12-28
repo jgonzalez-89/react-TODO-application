@@ -20,7 +20,6 @@ const Formulario = ({ setUpdated }) => {
       .catch(() => {
         console.error("Error");
       });
-      
   };
 
   return (

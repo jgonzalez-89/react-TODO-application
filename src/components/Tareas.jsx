@@ -1,7 +1,6 @@
 import React from "react";
 
 const Tareas = ({ todo }) => {
-
   return (
     <div className="m-3 bg-white shadow-xl px-5 py-10 rounded-xl">
       <p className="font-bold mb-3 text-gray-700 uppercase">
