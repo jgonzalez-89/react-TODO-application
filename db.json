@@ -3,7 +3,7 @@
     {
       "id": 1,
       "nombre": "Juan",
-      "nombreTarea": "Terminar ejercicios de JavaScript",
+      "tarea": "Terminar ejercicios de JavaScript",
       "email": "correo@correo.com",
       "fecha": "2022-12-15",
       "comentario": "Solo duerme"
