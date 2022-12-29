@@ -1,6 +1,9 @@
 import React from "react";
+import { useState } from "react";
 
 const Tareas = ({ todo }) => {
+  const [todos, setTodo] = useState("");
+
   return (
     <div className="m-3 bg-white shadow-xl px-5 py-10 rounded-xl">
       <p className="font-bold mb-3 text-gray-700 uppercase">
@@ -32,7 +35,7 @@ const Tareas = ({ todo }) => {
         <button
           type="button"
           className=" bg-sky-600 py-2 px-10 text-white uppercase font-bold hover:bg-sky-800 rounded-md cursor-pointer transition-all"
-          // onClick={() => setTarea(tarea)}
+          // onClick={() => setTodos(todo)}
         >
           Editar
         </button>

@@ -5,10 +5,6 @@ import Header from "./components/Header";
 import ListadoTareas from "./components/ListadoTareas";
 import { HttpHandler } from "./http/handler";
 
-export function loader() {
-  console.log(import.meta.env);
-}
-
 function App() {
   const [todos, setTodos] = useState([]);
   const [updated, setUpdated] = useState(0);
