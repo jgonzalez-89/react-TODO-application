@@ -2,11 +2,19 @@
   "posts": [
     {
       "id": 1,
-      "nombre": "Juan",
-      "tarea": "Terminar ejercicios de JavaScript",
-      "email": "correo@correo.com",
-      "fecha": "2022-12-15",
-      "comentario": "Solo duerme"
+      "nombre": "Juan ",
+      "tarea": "Estudiar React",
+      "email": "correo@correo.es",
+      "fecha": "2022-12-31",
+      "comentario": "Terminar ejercicios del 10 al 20"
+    },
+    {
+      "id": 2,
+      "nombre": "Pedro",
+      "tarea": "Terminar ejercicios de Python",
+      "email": "correo@correo.es",
+      "fecha": "2022-12-31",
+      "comentario": "Ejercicios del 10 al 100"
     }
   ]
 }

@@ -1,6 +1,7 @@
 export class HttpHandler {
     constructor() {
         this.url = "http://localhost:3000/posts"
+        this.contentType = { 'Content-Type': 'application/json' }
     }
 
     async get() {
@@ -14,10 +15,25 @@ export class HttpHandler {
         const response = await fetch(this.url, {
             method: "POST",
             body: JSON.stringify(payload),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: this.contentType
         })
         return await response.json()
+    }
+
+    async put(id, payload) {
+        const response = await fetch(`${this.url}/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(payload),
+            headers: this.contentType
+        })
+    }
+
+    async delete(id) {
+        const response = await fetch(`${this.url}/${id}`, {
+            method: "DELETE",
+            headers: this.contentType
+        })
+
+        return response.status === 200 ? true : false
     }
 }

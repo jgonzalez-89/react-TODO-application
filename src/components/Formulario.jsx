@@ -1,25 +1,32 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import { NewTodo } from "../models/todo";
 import { HttpHandler } from "../http/handler";
 
-const Formulario = ({ setUpdated }) => {
-  const [todo, setTodo] = useState(NewTodo());
+const Formulario = ({ todo, setTodo }) => {
   const handler = new HttpHandler();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: Send the post:
-    handler
-      .post(todo)
-      .then(() => {
-        setUpdated((prev) => prev++);
-        setTodo(NewTodo());
-      })
-      .catch(() => {
-        console.error("Error");
-      });
+    if (todo.id === "") {
+      handler
+        .post(todo)
+        .then(() => {
+          setTodo(NewTodo());
+        })
+        .catch(() => {
+          console.error("Error");
+        });
+    } else {
+      handler
+        .put(todo.id, todo)
+        .then(() => {
+          setTodo(NewTodo());
+        })
+        .catch(() => {
+          console.error("Error");
+        });
+    }
   };
 
   return (
