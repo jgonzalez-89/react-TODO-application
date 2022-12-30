@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": 1,
-      "nombre": "Juan ",
+      "nombre": "Juan y maria",
       "tarea": "Estudiar React",
       "email": "correo@correo.es",
       "fecha": "2022-12-31",
