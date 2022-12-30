@@ -8,23 +8,25 @@
 
 ### Requirements:
 
-1. Install the packages:
+
+
+1. Run the Json-Server:
 ```
-$ npm install
+$ npx json-server --watch db.json
 ```
-2. Create a .env file:
+2. Launch the React APP:
 ```
 $ npm run dev
 ```
 
 ### Styles
-You can update the `styles/index.css` or create new `.css` files inside `styles/` and import them into your current scss or js files depending on your needs.
+Styles with Tailwind CSS
 
 ### Components
 Add more files into your `./src/components` or styles folder as you need them and import them into your current files as needed.
 
-### Pages
-Add all the pages like Home, About, Contact or whatever you need. These should be routed in src/App.jsx, don't touch src/main.jsx.
+### http
+This is the event type for fetch events dispatched on the service worker global scope.
 
 
 <p align="center">
@@ -32,10 +34,3 @@ Add all the pages like Home, About, Contact or whatever you need. These should b
 </p>
 
 ```     
-               
-
-**Note (New changes)**: Components have been converted into functions to support the use of hooks:
-* Instead of a class component, we're using a `const` function.
-* Class `constructor` and `state` have been replaced by `useState()` hooks.
-* `componentDidMount()` was replaced by `useEffect({}, [])` - It runs at mount thanks to the second parameter (`[]`).
-* `Actions` and `Store` still work the same way.
