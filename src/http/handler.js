@@ -1,6 +1,6 @@
 export class HttpHandler {
     constructor() {
-        this.url = "http://localhost:3000/posts"
+        this.url = "http://127.0.0.1:3245/items"
         this.contentType = { 'Content-Type': 'application/json' }
     }
 
