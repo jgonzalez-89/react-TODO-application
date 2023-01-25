@@ -7,16 +7,14 @@
 
 
 ### Requirements:
-
-
-
-1. Run the Json-Server:
 ```
-$ npx json-server --watch db.json
-```
-2. Launch the React APP:
-```
-$ npm run dev
+1. Instala las dependencias del proyecto `$ pipenv install`.
+
+2. Entra dentro del **virtual environment** `$ pipenv shell`
+
+3. Inicio al servidor flask `$ pipenv run python app.py`
+
+4. Launch the React APP: `$ npm run dev`
 ```
 
 ### Styles

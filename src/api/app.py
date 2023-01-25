@@ -1,13 +1,8 @@
 import uuid
-# importando el modulo uuid para generar id's unicos
 from flask_cors import CORS
-# importando flask_cors para habilitar solicitudes cruzadas en la aplicacion
 import json
-# importando json para trabajar con archivos json
 from flask import Flask, jsonify, request
-# importando flask para crear una aplicacion Flask y jsonify para parsear objetos python a json y request para manejar las solicitudes HTTP
 from typing import TypedDict
-# importando el modulo TypedDict para definir el esquema de una tarea "todo"
 
 
 app = Flask(__name__)
@@ -39,13 +34,13 @@ class TodoType(TypedDict):
     # Clase TodoType se utiliza para definir el esquema de una tarea "todo"
 
 
-DB_PATH = "src/api/db.json"
+DB_PATH = "./db.json"
 # Ruta del archivo json que contiene las tareas
 
 
 class Writter:
     def read(self) -> list[TodoType]:
-        with open(DB_PATH, "rb") as file:
+        with open(DB_PATH, "r") as file:
             return json.loads(file.read())
         # Funcion para leer el archivo json y parsearlo a una lista de objetos TodoType
 
