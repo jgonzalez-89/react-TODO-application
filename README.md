@@ -12,7 +12,7 @@
 
 2. Entra dentro del **virtual environment** `$ pipenv shell`
 
-3. Inicio al servidor flask `$ pipenv run python app.py`
+3. Inicio al servidor flask `$ pipenv run python src/api/app.py`
 
 4. Launch the React APP: `$ npm run dev`
 ```
